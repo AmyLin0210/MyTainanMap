@@ -5,23 +5,20 @@ using UnityEngine;
 public class DiaryInfo : MonoBehaviour {
 
     public GameObject buildings;
-    public GameObject school;
+    public GameObject school, shop, restaurant;
+    public Canvas diary_canvas;
 
     int build_totalNum;
     string directory_path;
-    // Use this for initialization
-    void Start () {
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public GameObject GetDiaryBuilding( string build_name )
     {
         if (build_name == "school")
             return school;
+        else if (build_name == "shop")
+            return shop;
+        else if (build_name == "restaurant")
+            return restaurant;
         else
             return null;
     }
