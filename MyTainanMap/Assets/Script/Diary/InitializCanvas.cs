@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CreatBuilding : MonoBehaviour {
+public class InitializCanvas : MonoBehaviour {
 
+    public Canvas diary_read_canvas;
 	// Use this for initialization
 	void Start () {
-		
+        diary_read_canvas.enabled = false;
 	}
 	
 	// Update is called once per frame

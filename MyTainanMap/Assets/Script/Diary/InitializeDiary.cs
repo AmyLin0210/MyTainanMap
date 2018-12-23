@@ -45,14 +45,15 @@ public class InitializeDiary : MonoBehaviour {
         sr.Close();
 
         // the building initialize
+        DirectoryInfo df = new DirectoryInfo(diary_directory);//Assuming Test is your Folder
+        FileInfo[] all_FileInfo = df.GetFiles("diary*"); //Getting Text files
         string diary_file_path;
         string diary_file_information;
-        string []file_building_position;
+        string[] file_building_position;
         GameObject diary_file_building;
-
-        for ( int i = 1; i <= building_totalNum; ++i)
+        foreach (FileInfo file in all_FileInfo)
         {
-            diary_file_path = diary_directory + "diary_" + i.ToString() + ".txt";  // the diary path
+            diary_file_path = diary_directory + file.Name;
             sr = new StreamReader(diary_file_path);                              // open the file
 
             // set up the building 
@@ -60,23 +61,25 @@ public class InitializeDiary : MonoBehaviour {
             diary_file_information = sr.ReadLine();
             diary_file_building = Instantiate(gameObject.GetComponent<DiaryInfo>().GetDiaryBuilding(diary_file_information));
             diary_file_building.transform.parent = buildings;
+            diary_file_building.GetComponent<buildInfo>().DiaryPath = diary_file_path;
+            diary_file_building.GetComponent<buildInfo>().DiaryInfo = gameObject;
+
             // the position of the building
             diary_file_information = sr.ReadLine();
-            if( diary_file_information.IndexOf( "position" ) != -1)
+            if (diary_file_information.IndexOf("position") != -1)
             {
                 diary_file_information = diary_file_information.Substring(diary_file_information.IndexOf(":") + 1);
-                diary_file_information = diary_file_information.Substring(1, diary_file_information.Length - 2 );
+                diary_file_information = diary_file_information.Substring(1, diary_file_information.Length - 2);
                 file_building_position = diary_file_information.Split(',');
                 diary_file_building.transform.position = new Vector3(
                     float.Parse(file_building_position[0]),
                     float.Parse(file_building_position[1]),
                     float.Parse(file_building_position[2]));
             }
-
-
             //end readfile
             sr.Close();
         }
+
 
     }
 	
