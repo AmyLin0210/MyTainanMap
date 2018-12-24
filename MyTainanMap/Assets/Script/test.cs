@@ -12,7 +12,7 @@ public class test : MonoBehaviour, IPointerClickHandler {
 
         // 以下是可以新增 building 的 code
         GameObject haha = Instantiate(diaryInfo.GetComponent<DiaryInfo>().GetDiaryBuilding("shop"));
-        haha.transform.position = new Vector3(2, 0, 1);
+        haha.transform.position = new Vector3(0, 0, -5);
         haha.transform.parent = buildings;
         haha.GetComponent<buildInfo>().DiaryInfo = diaryInfo;
         haha.GetComponent<buildInfo>().CreateNewFile();
