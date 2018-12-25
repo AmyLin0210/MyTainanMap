@@ -6,7 +6,7 @@ using System.IO;
 public class InitializeDiary : MonoBehaviour {
 
     public Transform buildings;
-    public string diary_directory;
+    string diary_directory;
     string diary_detailFile;
     int    building_totalNum;
 	// Use this for initialization
@@ -14,6 +14,9 @@ public class InitializeDiary : MonoBehaviour {
 
         string readFile;
 
+        // find the my document
+        System.Environment.SpecialFolder myDoc = System.Environment.SpecialFolder.MyDocuments;
+        diary_directory = System.Environment.GetFolderPath(myDoc)+"\\MyTainanMap\\";
         diary_detailFile = diary_directory + "detail.txt";
         // check if the map information file exixt
         if ( !Directory.Exists(diary_directory) )
