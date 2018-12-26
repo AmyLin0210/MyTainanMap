@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class AddCanvasControl : MonoBehaviour {
 
+    public GameObject diary_info;
     string diary_path, build_path;
-    public void ShowCanvas( string path)
+    
+    void ShowNewCanvas()
     {
-        build_path = path;
-        gameObject.GetComponent<Canvas>().enabled = true;
+        diary_info.GetComponent<CanvasDiaryControl>().ShowCanvas( diary_info.GetComponent<CanvasDiaryControl>().CanvasNew );
+        gameObject.GetComponent<Canvas>().enabled = false;
     }
+
+    
 }

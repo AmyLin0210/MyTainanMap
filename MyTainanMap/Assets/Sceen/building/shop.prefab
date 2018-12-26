@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 33481005774073738}
   - component: {fileID: 23667450331685588}
   - component: {fileID: 95775412847934718}
+  - component: {fileID: 65262910328664318}
   m_Layer: 0
   m_Name: shop
   m_TagString: shop
@@ -90,6 +91,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788883007979594}
   m_Mesh: {fileID: 4300000, guid: ae9f073041fc5d24e988970ad76626d2, type: 3}
+--- !u!65 &65262910328664318
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788883007979594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2591696, y: 0.9967389, z: 1.7668797}
+  m_Center: {x: -1.0339031, y: 0.47229928, z: 0.03419849}
 --- !u!95 &95775412847934718
 Animator:
   serializedVersion: 3

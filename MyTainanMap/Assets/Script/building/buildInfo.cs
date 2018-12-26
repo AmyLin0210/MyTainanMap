@@ -8,6 +8,25 @@ public class buildInfo : MonoBehaviour {
     string diary_path;
     public GameObject diary_info;
 
+    public void Update ()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit ray_cast_hit;
+
+            if (Physics.Raycast(ray, out ray_cast_hit))
+            {
+                GameObject building = ray_cast_hit.collider.gameObject;
+                if (building.tag.ToString() == "shop")
+                {
+                    // open the diary
+                    diary_info.GetComponent<CanvasDiaryControl>().OpenDiary(diary_path);
+                }
+            }
+        }
+    }
+
     public void CreateNewFile()
     {
         int diary_num = diary_info.GetComponent<DiaryInfo>().BuildTotalNum + 1;

@@ -6,7 +6,7 @@ using System.IO;
 public class InitializeDiary : MonoBehaviour {
 
     public Transform buildings;
-    string diary_directory;
+    public string diary_directory;
     string diary_detailFile;
     int    building_totalNum;
 	// Use this for initialization
