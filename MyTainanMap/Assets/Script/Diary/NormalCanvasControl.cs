@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalCanvasControl : MonoBehaviour {
 
     string building_path;
+    string image_path;
 	// Use this for initialization
 	void Start () {
 		

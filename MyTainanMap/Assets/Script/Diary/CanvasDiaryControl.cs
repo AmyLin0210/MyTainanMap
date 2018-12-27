@@ -17,10 +17,30 @@ public class CanvasDiaryControl : MonoBehaviour {
     void Start()
     {
         // initialize
-        project_path = diary_info.GetComponent<DiaryInfo>().DirectoryPath;
+        project_path = diary_info.GetComponent<DiaryInfo>().ProjectDirectory;
         canvas_add.GetComponent<Canvas>().enabled = false;
         canvas_new.GetComponent<Canvas>().enabled = false;
         canvas_read.GetComponent<Canvas>().enabled = false;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit ray_cast_hit;
+
+            if (Physics.Raycast(ray, out ray_cast_hit))
+            {
+                GameObject building = ray_cast_hit.collider.gameObject;
+                if (building.tag.ToString() == "shop" || building.tag.ToString() == "school")
+                {
+                    // open the diary
+                    gameObject.GetComponent<CanvasDiaryControl>().OpenDiary(building.GetComponent<buildInfo>().BuildingFile);
+                    gameObject.GetComponent<DiaryInfo>().BuildingFileNow = building.GetComponent<buildInfo>().BuildingFile;
+                }
+            }
+        }
     }
 
     public void OpenDiary( string path )
@@ -29,12 +49,14 @@ public class CanvasDiaryControl : MonoBehaviour {
         string fileConetent;
         StreamReader sr;
         building_path = path;
+        diary_info.GetComponent<DiaryInfo>().BuildingFileNow = path;
 
         sr = new StreamReader(building_path);
+        Debug.Log("now: " + path);
 
         while( (fileConetent = sr.ReadLine()) != null)
         {
-            if(fileConetent == "diary")
+            if(fileConetent.IndexOf("diary") != -1)
             {
                 isDiary = true;
                 break;

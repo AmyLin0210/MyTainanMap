@@ -8,8 +8,10 @@ public class DiaryInfo : MonoBehaviour {
     public GameObject school, shop, restaurant;
     public Canvas diary_canvas;
 
-    int build_totalNum;
-    string directory_path;
+    int    build_num, diary_num, image_num;
+    string project_directory;
+    string building_file_now;
+    string diary_file_now;
 
     public GameObject GetDiaryBuilding( string build_name )
     {
@@ -23,27 +25,75 @@ public class DiaryInfo : MonoBehaviour {
             return null;
     }
 
-    public int BuildTotalNum
+    public int BuildNum
     {
         get
         {
-            return build_totalNum;
+            return build_num;
         }
         set
         {
-            build_totalNum = value;
+            build_num = value;
         }
     }
 
-    public string DirectoryPath
+    public int ImageNum
     {
         get
         {
-            return directory_path;
+            return image_num;
         }
         set
         {
-            directory_path = value;
+            image_num = value;
+        }
+    }
+
+    public int DiaryNum
+    {
+        get
+        {
+            return diary_num;
+        }
+        set
+        {
+            diary_num = value;
+        }
+    }
+
+    public string ProjectDirectory
+    {
+        get
+        {
+            return project_directory;
+        }
+        set
+        {
+            project_directory = value;
+        }
+    }
+
+    public string BuildingFileNow
+    {
+        get
+        {
+            return building_file_now;
+        }
+        set
+        {
+            building_file_now = value;
+        }
+    }
+
+    public string DiaryFileNow
+    {
+        get
+        {
+            return diary_file_now;
+        }
+        set
+        {
+            diary_file_now = value;
         }
     }
 }

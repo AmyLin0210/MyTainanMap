@@ -6,65 +6,57 @@ using System.IO;
 public class InitializeDiary : MonoBehaviour {
 
     public Transform buildings;
-    public string diary_directory;
-    string diary_detailFile;
-    int    building_totalNum;
+    string project_directory;
+    int    building_num;
+    int    diary_num;
+    int    image_num;
+
 	// Use this for initialization
 	void Start () {
 
-        string readFile;
+        string diary_imageFolder;
+        string building_folder;
+        string diary_folder;
 
         // find the my document
         System.Environment.SpecialFolder myDoc = System.Environment.SpecialFolder.MyDocuments;
-        diary_directory = System.Environment.GetFolderPath(myDoc)+"\\MyTainanMap\\";
-        diary_detailFile = diary_directory + "detail.txt";
+        project_directory = System.Environment.GetFolderPath(myDoc)+"\\MyTainanMap\\";
+        building_folder = project_directory + "Building\\";
+        diary_folder = project_directory + "Diary\\";
+        diary_imageFolder = project_directory + "Image\\";
+
+        gameObject.GetComponent<DiaryInfo>().ProjectDirectory = project_directory;
+
         // check if the map information file exixt
-        if ( !Directory.Exists(diary_directory) )
-            Directory.CreateDirectory(diary_directory);
+        CheckDirectoryExist(project_directory );
+        CheckDirectoryExist(diary_folder);
+        CheckDirectoryExist(building_folder);
+        CheckDirectoryExist(diary_imageFolder);
 
-        StreamReader sr;
-        StreamWriter sw;
-        FileStream fs;
-        FileInfo   finfo = new FileInfo(diary_detailFile);
-        if ( !finfo.Exists )
-        {
-            fs = finfo.Create();
-            fs.Close();
-            sw = new StreamWriter(diary_detailFile);
-            sw.WriteLine("0");
-            sw.Flush();
-            sw.Close();
-        }
-
-        // initialize the map information
-        gameObject.GetComponent<DiaryInfo>().DirectoryPath = diary_directory;
-
-        sr = new StreamReader(diary_detailFile);
-
-        // how many building
-        readFile = sr.ReadLine();
-        building_totalNum = int.Parse(readFile);
-        gameObject.GetComponent<DiaryInfo>().BuildTotalNum = building_totalNum;
-        sr.Close();
+        // initialize and read the detail file
+        gameObject.GetComponent<DiaryInfo>().BuildNum = DetailFile( building_folder );
+        gameObject.GetComponent<DiaryInfo>().ImageNum = DetailFile( diary_imageFolder );
+        gameObject.GetComponent<DiaryInfo>().DiaryNum = DetailFile( diary_folder );
 
         // the building initialize
-        DirectoryInfo df = new DirectoryInfo(diary_directory);//Assuming Test is your Folder
-        FileInfo[] all_FileInfo = df.GetFiles("diary*"); //Getting Text files
-        string diary_file_path;
+        DirectoryInfo df = new DirectoryInfo( building_folder );//Assuming Test is your Folder
+        FileInfo[] all_FileInfo = df.GetFiles("building*"); //Getting Text files
+        string building_file_path;
         string diary_file_information;
         string[] file_building_position;
         GameObject diary_file_building;
+        StreamReader sr;
         foreach (FileInfo file in all_FileInfo)
         {
-            diary_file_path = diary_directory + file.Name;
-            sr = new StreamReader(diary_file_path);                              // open the file
+            building_file_path = building_folder + file.Name;
+            sr = new StreamReader(building_file_path);                              // open the file
 
             // set up the building 
             // the kind of the building
             diary_file_information = sr.ReadLine();
             diary_file_building = Instantiate(gameObject.GetComponent<DiaryInfo>().GetDiaryBuilding(diary_file_information));
             diary_file_building.transform.parent = buildings;
-            diary_file_building.GetComponent<buildInfo>().DiaryPath = diary_file_path;
+            diary_file_building.GetComponent<buildInfo>().BuildingFile = building_file_path;
             diary_file_building.GetComponent<buildInfo>().DiaryInfo = gameObject;
 
             // the position of the building
@@ -88,6 +80,39 @@ public class InitializeDiary : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+    }
+
+    void CheckDirectoryExist( string directory )
+    {
+        if (!Directory.Exists( directory ))
+            Directory.CreateDirectory( directory );
+    }
+
+    int DetailFile( string folder_path)
+    {
+        int num;
+        string file_path = folder_path + "detail.txt";
+        StreamReader sr;
+        StreamWriter sw;
+        FileStream fs;
+        FileInfo finfo = new FileInfo( file_path );
+        if (!finfo.Exists)
+        {
+            fs = finfo.Create();
+            fs.Close();
+            sw = new StreamWriter( file_path );
+            sw.WriteLine("0");
+            sw.Flush();
+            sw.Close();
+            return 0;
+        }
+        else
+        {
+            sr = new StreamReader( file_path );
+            string temp = sr.ReadLine();
+            num = int.Parse(temp);
+            sr.Close();
+            return num;
+        }
+    }
 }

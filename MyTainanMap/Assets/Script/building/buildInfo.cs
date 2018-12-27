@@ -5,55 +5,52 @@ using System.IO;
 
 public class buildInfo : MonoBehaviour {
 
-    string diary_path;
+    string building_file;
     public GameObject diary_info;
 
     public void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit ray_cast_hit;
-
-            if (Physics.Raycast(ray, out ray_cast_hit))
-            {
-                GameObject building = ray_cast_hit.collider.gameObject;
-                if (building.tag.ToString() == "shop")
-                {
-                    // open the diary
-                    diary_info.GetComponent<CanvasDiaryControl>().OpenDiary(diary_path);
-                }
-            }
-        }
     }
 
     public void CreateNewFile()
     {
-        int diary_num = diary_info.GetComponent<DiaryInfo>().BuildTotalNum + 1;
-        string file_path = diary_info.GetComponent<DiaryInfo>().DirectoryPath + "diary_" + diary_num.ToString() + ".txt";
-        diary_path = file_path;
+        int diary_num = diary_info.GetComponent<DiaryInfo>().BuildNum + 1;
+        building_file = diary_info.GetComponent<DiaryInfo>().ProjectDirectory + "Building\\building_" + diary_num.ToString() + ".txt";
 
-        FileInfo finfo = new FileInfo(file_path);
+        Debug.Log(building_file);
+
+        FileInfo finfo = new FileInfo(building_file);
         FileStream fs = finfo.Create();                           // create empty file of the building
         fs.Close();
-        StreamWriter sw = new StreamWriter(file_path);
+        StreamWriter sw = new StreamWriter(building_file);
         sw.WriteLine(transform.tag);                              // the kind of building
         sw.WriteLine("position:" + transform.position.ToString());  // the position of building
         sw.Flush();
         sw.Close();
 
-        diary_info.GetComponent<DiaryInfo>().BuildTotalNum += 1;
+        diary_info.GetComponent<DiaryInfo>().BuildNum += 1;
+        ChangeBuildingDetailNum(diary_info.GetComponent<DiaryInfo>().BuildNum);
     }
 
-    public string DiaryPath
+    void ChangeBuildingDetailNum(int num )
+    {
+        string path = diary_info.GetComponent<DiaryInfo>().ProjectDirectory + "Building\\detail.txt";
+        FileInfo finfo = new FileInfo(path);
+        StreamWriter sw = finfo.CreateText();
+        sw.WriteLine(num.ToString());
+        sw.Flush();
+        sw.Close();
+    }
+
+    public string BuildingFile
     {
         get
         {
-            return diary_path;
+            return building_file;
         }
         set
         {
-            diary_path = value;
+            building_file = value;
         }
     }
 
