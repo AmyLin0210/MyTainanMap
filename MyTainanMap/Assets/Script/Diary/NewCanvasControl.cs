@@ -15,17 +15,25 @@ public class NewCanvasControl : MonoBehaviour {
     string image_path;
     string diary_path;
     string building_path;
-    bool   isDiaryExist = false;
+    bool   isDiaryExist;
+    bool   isChangeDiary = false;
+
+    public void ShowCanvas()
+    {
+        gameObject.GetComponent<Canvas>().enabled = true;
+        diary_date.text = null;
+        diary_content.text = null;
+        diary_image.sprite = null;
+    }
 
     //[MenuItem("Custom/OpenFile")]
     public void AddImage()
     {
-        string image_path = EditorUtility.OpenFilePanel("Open File Dialog", "D:\\", "Image Files(*.png; *.jpg; *.gif)| *.png; *.jpg; *.gif");
-        Debug.Log(image_path);
+        image_path = EditorUtility.OpenFilePanel("Open File Dialog", "D:\\", "Image Files(*.png; *.jpg; *.gif)| *.png; *.jpg; *.gif");
 
         byte[] fileDate;
 
-        if( image_path != null)
+        if( !string.IsNullOrEmpty(image_path))
         {
             fileDate = File.ReadAllBytes(image_path);
             file_image = new Texture2D(100, 100);
@@ -42,11 +50,10 @@ public class NewCanvasControl : MonoBehaviour {
 
         StreamWriter sw;
         FileInfo finfo;
-        bool isDiaryExist = false;
         string diary_file;
         int diaryNum;
 
-        if (!isDiaryExist)
+        if (!isChangeDiary)
         {
             string path = diary_info.GetComponent<DiaryInfo>().ProjectDirectory + "Diary\\detail.txt";
             diaryNum = diary_info.GetComponent<DiaryInfo>().DiaryNum + 1;
@@ -55,6 +62,7 @@ public class NewCanvasControl : MonoBehaviour {
             finfo = new FileInfo(path);
             sw = finfo.CreateText();
             sw.WriteLine(diaryNum.ToString());
+
             sw.Flush();
             sw.Close();
         }
@@ -65,11 +73,15 @@ public class NewCanvasControl : MonoBehaviour {
         sw = finfo.CreateText();
         sw.WriteLine(diary_date.text);
         sw.WriteLine(diary_content.text);
+        if ( string.IsNullOrEmpty(image_path) )
+            sw.WriteLine("no image");
+        else
+            sw.WriteLine(image_path);
         sw.Flush();
         sw.Close();
 
         building_path = diary_info.GetComponent<DiaryInfo>().BuildingFileNow;
-        if (!isDiaryExist)
+        if ( !isDiaryExist )
         {
             finfo = new FileInfo(building_path);
             sw = finfo.AppendText();
@@ -78,6 +90,27 @@ public class NewCanvasControl : MonoBehaviour {
             sw.Flush();
             sw.Close();
         }
+        else
+        {
+            finfo = new FileInfo(building_path);
+            sw = finfo.AppendText();
+            sw.WriteLine(diary_file);
+            sw.Flush();
+            sw.Close();
+        }
 
+        diary_info.GetComponent<CanvasDiaryControl>().ExitCanvas();
+    }
+
+    public bool IsDiaryExit
+    {
+        get
+        {
+            return isDiaryExist;
+        }
+        set
+        {
+            isDiaryExist = value;
+        }
     }
 }

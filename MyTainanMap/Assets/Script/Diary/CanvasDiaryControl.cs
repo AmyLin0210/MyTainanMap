@@ -25,6 +25,7 @@ public class CanvasDiaryControl : MonoBehaviour {
 
     void Update()
     {
+        // just for test
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -33,7 +34,7 @@ public class CanvasDiaryControl : MonoBehaviour {
             if (Physics.Raycast(ray, out ray_cast_hit))
             {
                 GameObject building = ray_cast_hit.collider.gameObject;
-                if (building.tag.ToString() == "shop" || building.tag.ToString() == "school")
+                if ((building.tag.ToString() == "shop" || building.tag.ToString() == "school") && gameObject.GetComponent<DiaryInfo>().IsDiaryOpen == false)
                 {
                     // open the diary
                     gameObject.GetComponent<CanvasDiaryControl>().OpenDiary(building.GetComponent<buildInfo>().BuildingFile);
@@ -45,14 +46,15 @@ public class CanvasDiaryControl : MonoBehaviour {
 
     public void OpenDiary( string path )
     {
+        gameObject.GetComponent<DiaryInfo>().IsDiaryOpen = true;
+        diary_info.GetComponent<DiaryInfo>().BuildingFileNow = path;
+
         bool isDiary = false;
         string fileConetent;
         StreamReader sr;
         building_path = path;
-        diary_info.GetComponent<DiaryInfo>().BuildingFileNow = path;
 
         sr = new StreamReader(building_path);
-        Debug.Log("now: " + path);
 
         while( (fileConetent = sr.ReadLine()) != null)
         {
@@ -88,14 +90,22 @@ public class CanvasDiaryControl : MonoBehaviour {
     {
         CloseAllCanvas();
         canvas_read.GetComponent<Canvas>().enabled = true;
+        canvas_read.GetComponent<ReadCanvasControl>().LoadDiary();
         canvas_read.GetComponent<NormalCanvasControl>().BuildingPath = building_path;
     }
 
-    public void ShowNewCanvas()
+    public void ShowNewCanvasNew()
     {
         CloseAllCanvas();
-        canvas_new.GetComponent<Canvas>().enabled = true;
-        canvas_new.GetComponent<NormalCanvasControl>().BuildingPath = building_path;
+        canvas_new.GetComponent<NewCanvasControl>().ShowCanvas();
+        canvas_new.GetComponent<NewCanvasControl>().IsDiaryExit = false;
+    }
+
+    public void ShowNewCanvasAdd()
+    {
+        CloseAllCanvas();
+        canvas_new.GetComponent<NewCanvasControl>().ShowCanvas();
+        canvas_new.GetComponent<NewCanvasControl>().IsDiaryExit = true;
     }
 
     public void CloseAllCanvas()
@@ -103,6 +113,12 @@ public class CanvasDiaryControl : MonoBehaviour {
         canvas_add.GetComponent<Canvas>().enabled = false;
         canvas_new.GetComponent<Canvas>().enabled = false;
         canvas_read.GetComponent<Canvas>().enabled = false;
+    }
+
+    public void ExitCanvas()
+    {
+        CloseAllCanvas();
+        gameObject.GetComponent<DiaryInfo>().IsDiaryOpen = false;
     }
 
     public GameObject GetCanvas( string canvas)

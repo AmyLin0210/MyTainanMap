@@ -12,6 +12,7 @@ public class DiaryInfo : MonoBehaviour {
     string project_directory;
     string building_file_now;
     string diary_file_now;
+    bool   isDiaryOpen = false;
 
     public GameObject GetDiaryBuilding( string build_name )
     {
@@ -94,6 +95,18 @@ public class DiaryInfo : MonoBehaviour {
         set
         {
             diary_file_now = value;
+        }
+    }
+
+    public bool IsDiaryOpen
+    {
+        get
+        {
+            return isDiaryOpen;
+        }
+        set
+        {
+            isDiaryOpen = value;
         }
     }
 }
