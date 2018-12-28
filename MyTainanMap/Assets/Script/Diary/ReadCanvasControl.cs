@@ -15,6 +15,11 @@ public class ReadCanvasControl : MonoBehaviour {
 
     public void LoadDiary()
     {
+        diary_all_path.Clear();
+        diary_date.text = "";
+        diary_content.text = "";
+        diary_image.sprite = null;
+
         building_path = diary_info.GetComponent<DiaryInfo>().BuildingFileNow;
         StreamReader sr = new StreamReader(building_path);
 

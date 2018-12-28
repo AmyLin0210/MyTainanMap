@@ -21,20 +21,22 @@ public class NewCanvasControl : MonoBehaviour {
     public void ShowCanvas()
     {
         gameObject.GetComponent<Canvas>().enabled = true;
-        diary_date.text = null;
-        diary_content.text = null;
+        diary_date.text = "";
+        diary_content.text = "";
         diary_image.sprite = null;
+        image_path = "";
     }
 
     //[MenuItem("Custom/OpenFile")]
     public void AddImage()
     {
-        image_path = EditorUtility.OpenFilePanel("Open File Dialog", "D:\\", "Image Files(*.png; *.jpg; *.gif)| *.png; *.jpg; *.gif");
+        string temp_path = EditorUtility.OpenFilePanel("Open File Dialog", "D:\\", "Image Files(*.png; *.jpg; *.gif)| *.png; *.jpg; *.gif");
 
         byte[] fileDate;
 
-        if( !string.IsNullOrEmpty(image_path))
+        if( !string.IsNullOrEmpty(temp_path))
         {
+            image_path = temp_path;
             fileDate = File.ReadAllBytes(image_path);
             file_image = new Texture2D(100, 100);
             file_image.LoadImage(fileDate);
