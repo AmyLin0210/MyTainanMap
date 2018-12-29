@@ -10,6 +10,8 @@ public class CanvasDiaryControl : MonoBehaviour {
     public GameObject canvas_add;
     public GameObject canvas_new;
     public GameObject canvas_read;
+    public GameObject canvas_edit;
+    public GameObject player;
     string building_path, diar_path, project_path;
 
     bool isOpenDiary;
@@ -18,6 +20,7 @@ public class CanvasDiaryControl : MonoBehaviour {
     {
         // initialize
         project_path = diary_info.GetComponent<DiaryInfo>().ProjectDirectory;
+        canvas_edit.GetComponent<Canvas>().enabled = false;
         canvas_add.GetComponent<Canvas>().enabled = false;
         canvas_new.GetComponent<Canvas>().enabled = false;
         canvas_read.GetComponent<Canvas>().enabled = false;
@@ -56,10 +59,25 @@ public class CanvasDiaryControl : MonoBehaviour {
             ShowAddCanvas();
     }
 
+
     public void ShowCanvas( GameObject canvas )
     {
         canvas.GetComponent<Canvas>().enabled = true;
         canvas.GetComponent<NormalCanvasControl>().BuildingPath = building_path;
+    }
+
+    public void ShowEditCanvas()
+    {
+        CloseAllCanvas();
+        canvas_edit.GetComponent<Canvas>().enabled = true;
+    }
+
+    public void ShowEditCanvas(GameObject building)
+    {
+        CloseAllCanvas();
+        canvas_edit.GetComponent<Canvas>().enabled = true;
+        canvas_edit.GetComponent<EditCanvasControl>().building = building;
+        canvas_edit.GetComponent<EditCanvasControl>().startEditing();
     }
 
     public void ShowAddCanvas()
@@ -92,14 +110,17 @@ public class CanvasDiaryControl : MonoBehaviour {
 
     public void CloseAllCanvas()
     {
+        canvas_edit.GetComponent<Canvas>().enabled = false;
         canvas_add.GetComponent<Canvas>().enabled = false;
         canvas_new.GetComponent<Canvas>().enabled = false;
-        canvas_read.GetComponent<Canvas>().enabled = false;
+        canvas_read.GetComponent<Canvas>().enabled = false;        
     }
 
     public void ExitCanvas()
     {
         CloseAllCanvas();
+        // back to Edit Canvas
+        ShowEditCanvas();
         gameObject.GetComponent<DiaryInfo>().IsDiaryOpen = false;
     }
 
