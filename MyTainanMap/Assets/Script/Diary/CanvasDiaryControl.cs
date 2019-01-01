@@ -142,4 +142,37 @@ public class CanvasDiaryControl : MonoBehaviour {
         }
     }
 
+    public void changeBuildingInfo(GameObject building)
+    {
+        string buildingFile = building.GetComponent<buildInfo>().BuildingFile;
+        StreamReader sr = new StreamReader(buildingFile);
+        string fileContent = "";
+        string temp;
+
+        fileContent += building.tag.ToString() + "\r\n";
+        fileContent += "position:" + building.transform.position.ToString() + "\r\n" ;
+
+        temp = sr.ReadLine();
+        while (temp == null || temp.LastIndexOf("diary") != -1)
+            temp = sr.ReadLine();
+
+        if (temp.IndexOf("diary") != -1)
+        {
+            fileContent += temp;
+            while ((temp = sr.ReadLine()) != null)
+            {
+                fileContent += temp;
+            }
+        }
+
+        sr.Close();
+
+        FileInfo finfo = new FileInfo(buildingFile);
+        StreamWriter sw = finfo.CreateText();
+        sw.Write(fileContent);
+
+        sw.Flush();
+        sw.Close();
+
+    }
 }

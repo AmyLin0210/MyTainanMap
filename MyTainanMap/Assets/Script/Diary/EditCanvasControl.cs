@@ -76,5 +76,7 @@ public class EditCanvasControl : MonoBehaviour {
         camera.transform.parent = player.transform;
         camera.transform.localPosition = cameraStarting;
         camera.transform.localEulerAngles = cameraStartRotate;
+
+        diaryInfo.GetComponent<CanvasDiaryControl>().changeBuildingInfo(building);
     }
 }

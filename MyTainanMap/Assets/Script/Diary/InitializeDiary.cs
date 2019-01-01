@@ -51,6 +51,8 @@ public class InitializeDiary : MonoBehaviour {
             building_file_path = building_folder + file.Name;
             sr = new StreamReader(building_file_path);                              // open the file
 
+            Debug.Log(building_file_path);
+
             // set up the building 
             // the kind of the building
             diary_file_information = sr.ReadLine();
