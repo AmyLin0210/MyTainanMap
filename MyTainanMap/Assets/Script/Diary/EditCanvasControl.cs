@@ -20,7 +20,7 @@ public class EditCanvasControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (buildingMoving)
+        if (buildingMoving && !diaryInfo.transform.GetComponent<DiaryInfo>().IsDiaryOpen)
         {
             // handle moving keys
             if (Input.GetKey(KeyCode.W))

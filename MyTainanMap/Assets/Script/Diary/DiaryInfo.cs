@@ -8,6 +8,7 @@ public class DiaryInfo : MonoBehaviour {
     public GameObject buildings;
     public GameObject school, shop, restaurant;
     public Canvas diary_canvas;
+    public string chosenBuilding = "shop";
 
     int    build_num, diary_num, image_num;
     string project_directory;
