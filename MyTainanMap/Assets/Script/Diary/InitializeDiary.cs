@@ -51,8 +51,6 @@ public class InitializeDiary : MonoBehaviour {
             building_file_path = building_folder + file.Name;
             sr = new StreamReader(building_file_path);                              // open the file
 
-            Debug.Log(building_file_path);
-
             // set up the building 
             // the kind of the building
             diary_file_information = sr.ReadLine();
@@ -69,6 +67,31 @@ public class InitializeDiary : MonoBehaviour {
                 diary_file_information = diary_file_information.Substring(1, diary_file_information.Length - 2);
                 file_building_position = diary_file_information.Split(',');
                 diary_file_building.transform.position = new Vector3(
+                    float.Parse(file_building_position[0]),
+                    float.Parse(file_building_position[1]),
+                    float.Parse(file_building_position[2]));
+            }
+
+            diary_file_information = sr.ReadLine();
+            if (diary_file_information.IndexOf("scale") != -1)
+            {
+                diary_file_information = diary_file_information.Substring(diary_file_information.IndexOf(":") + 1);
+                diary_file_information = diary_file_information.Substring(1, diary_file_information.Length - 2);
+                file_building_position = diary_file_information.Split(',');
+
+                diary_file_building.transform.localScale = new Vector3(
+                    float.Parse(file_building_position[0]),
+                    float.Parse(file_building_position[1]),
+                    float.Parse(file_building_position[2]));
+            }
+
+            diary_file_information = sr.ReadLine();
+            if (diary_file_information.IndexOf("direction") != -1)
+            {
+                diary_file_information = diary_file_information.Substring(diary_file_information.IndexOf(":") + 1);
+                diary_file_information = diary_file_information.Substring(1, diary_file_information.Length - 2);
+                file_building_position = diary_file_information.Split(',');
+                diary_file_building.transform.eulerAngles = new Vector3(
                     float.Parse(file_building_position[0]),
                     float.Parse(file_building_position[1]),
                     float.Parse(file_building_position[2]));

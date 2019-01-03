@@ -33,7 +33,6 @@ public class test : MonoBehaviour, IPointerClickHandler {
                            //diaryInfo.GetComponent<DiaryInfo>().BuildingFileNow = building.GetComponent<buildInfo>().BuildingFile;
                        }
                         */
-                Debug.Log(building.ToString());
                 bool isBuilding = false;
                 foreach(string buildingName in editCanvas.GetComponent<buildingDropdown>().buildings)
                 {

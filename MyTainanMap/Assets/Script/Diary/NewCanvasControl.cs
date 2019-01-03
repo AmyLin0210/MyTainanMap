@@ -85,6 +85,7 @@ public class NewCanvasControl : MonoBehaviour {
         building_path = diary_info.GetComponent<DiaryInfo>().BuildingFileNow;
         if ( !isDiaryExist )
         {
+            Debug.Log("store diary");
             finfo = new FileInfo(building_path);
             sw = finfo.AppendText();
             sw.WriteLine("diary");

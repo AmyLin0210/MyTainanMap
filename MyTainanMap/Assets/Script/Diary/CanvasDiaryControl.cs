@@ -148,20 +148,32 @@ public class CanvasDiaryControl : MonoBehaviour {
         StreamReader sr = new StreamReader(buildingFile);
         string fileContent = "";
         string temp;
+        bool isDiary;
 
         fileContent += building.tag.ToString() + "\r\n";
         fileContent += "position:" + building.transform.position.ToString() + "\r\n" ;
+        fileContent += "scale:" + building.transform.localScale.ToString() + "\r\n";
+        fileContent += "direction:" + building.transform.eulerAngles.ToString() + "\r\n";
 
         temp = sr.ReadLine();
-        while (temp == null || temp.LastIndexOf("diary") != -1)
-            temp = sr.ReadLine();
+        isDiary = false;
 
-        if (temp.IndexOf("diary") != -1)
+        while ( ! string.IsNullOrEmpty(temp) )
         {
-            fileContent += temp;
+            temp = sr.ReadLine();
+            if (temp.IndexOf("diary") != -1)
+            {
+                isDiary = true;
+                break;
+            }
+        }
+
+        if ( isDiary )
+        {
+            fileContent += temp + "\r\n";
             while ((temp = sr.ReadLine()) != null)
             {
-                fileContent += temp;
+                fileContent += temp + "\r\n";
             }
         }
 

@@ -17,14 +17,14 @@ public class buildInfo : MonoBehaviour {
         int diary_num = diary_info.GetComponent<DiaryInfo>().BuildNum + 1;
         building_file = diary_info.GetComponent<DiaryInfo>().ProjectDirectory + "Building\\building_" + diary_num.ToString() + ".txt";
 
-        Debug.Log(building_file);
-
         FileInfo finfo = new FileInfo(building_file);
         FileStream fs = finfo.Create();                           // create empty file of the building
         fs.Close();
         StreamWriter sw = new StreamWriter(building_file);
         sw.WriteLine(transform.tag);                              // the kind of building
         sw.WriteLine("position:" + transform.position.ToString());  // the position of building
+        sw.WriteLine("scale:" + transform.localScale.ToString());
+        sw.WriteLine("direction:" + transform.eulerAngles.ToString());
         sw.Flush();
         sw.Close();
 
