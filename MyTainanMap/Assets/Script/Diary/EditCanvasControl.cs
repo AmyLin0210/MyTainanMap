@@ -47,6 +47,14 @@ public class EditCanvasControl : MonoBehaviour {
             {
                 building.transform.Rotate(Time.deltaTime * new Vector3(0, 30, 0) * rotate);
             }
+            if (Input.GetKey(KeyCode.Z))
+            {
+                building.transform.localScale += new Vector3(0.001f, 0.001f, 0.001f);
+            }
+            if (Input.GetKey(KeyCode.X))
+            {
+                building.transform.localScale -= new Vector3(0.001f, 0.001f, 0.001f);
+            }
         }
     }
 
