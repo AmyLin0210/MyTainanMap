@@ -160,12 +160,12 @@ public class CanvasDiaryControl : MonoBehaviour {
 
         while ( ! string.IsNullOrEmpty(temp) )
         {
-            temp = sr.ReadLine();
             if (temp.IndexOf("diary") != -1)
             {
                 isDiary = true;
                 break;
             }
+            temp = sr.ReadLine();
         }
 
         if ( isDiary )
