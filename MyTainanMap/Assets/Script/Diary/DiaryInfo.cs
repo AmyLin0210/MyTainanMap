@@ -6,7 +6,7 @@ using System.IO;
 public class DiaryInfo : MonoBehaviour {
 
     public GameObject buildings;
-    public GameObject school, shop, restaurant;
+    public GameObject school, shop, restaurant, monument1, monument2, monument3, bank, park, cinema;
     public Canvas diary_canvas;
     public string chosenBuilding = "shop";
 
@@ -24,6 +24,18 @@ public class DiaryInfo : MonoBehaviour {
             return shop;
         else if (build_name == "restaurant")
             return restaurant;
+        else if (build_name == "monument1")
+            return monument1;
+        else if (build_name == "monument2")
+            return monument2;
+        else if (build_name == "monument3")
+            return monument3;
+        else if (build_name == "bank")
+            return bank;
+        else if (build_name == "park")
+            return park;
+        else if (build_name == "cinema")
+            return cinema;
         else
             return null;
     }

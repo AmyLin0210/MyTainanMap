@@ -7,7 +7,7 @@ public class buildingDropdown : MonoBehaviour {
 
     public Dropdown dropdown;
     public GameObject diaryInfo;
-    public List<string> buildings = new List<string>() { "shop", "school", "restaurant" };
+    public List<string> buildings = new List<string>() { "shop", "school", "restaurant", "monument1", "monument2", "monument3" , "bank", "park", "cinema" };
 
     // Use this for initialization
     void Start () {      

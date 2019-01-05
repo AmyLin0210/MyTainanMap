@@ -2060,7 +2060,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 798816896}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2123322487}
+        m_MethodName: deleteBuilding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &798816896
@@ -6293,7 +6304,43 @@ Prefab:
         type: 2}
       propertyPath: restaurant
       value: 
-      objectReference: {fileID: 1054938497977604, guid: 3bc8e7a7d6c4edf46b34864158e853a1,
+      objectReference: {fileID: 1718293874466570, guid: 3bc8e7a7d6c4edf46b34864158e853a1,
+        type: 2}
+    - target: {fileID: 114670299502707906, guid: b96a4c5398fc8974790ff42fa530564b,
+        type: 2}
+      propertyPath: monument1
+      value: 
+      objectReference: {fileID: 1604715304845622, guid: ff49b2f2f2481964782fa616c7a9f6f9,
+        type: 2}
+    - target: {fileID: 114670299502707906, guid: b96a4c5398fc8974790ff42fa530564b,
+        type: 2}
+      propertyPath: monument2
+      value: 
+      objectReference: {fileID: 1462220078361314, guid: 5848232b3ade0204a94a799c25c80d5c,
+        type: 2}
+    - target: {fileID: 114670299502707906, guid: b96a4c5398fc8974790ff42fa530564b,
+        type: 2}
+      propertyPath: bank
+      value: 
+      objectReference: {fileID: 1107545391451444, guid: 49eee67032df7a3448ffe55dbbd63d56,
+        type: 2}
+    - target: {fileID: 114670299502707906, guid: b96a4c5398fc8974790ff42fa530564b,
+        type: 2}
+      propertyPath: monument3
+      value: 
+      objectReference: {fileID: 1932827079281100, guid: 83fdc0c62ac278c489fd6ef0dbf58b93,
+        type: 2}
+    - target: {fileID: 114670299502707906, guid: b96a4c5398fc8974790ff42fa530564b,
+        type: 2}
+      propertyPath: park
+      value: 
+      objectReference: {fileID: 1502370065078142, guid: f1311b7c202e1474999acd0d367173be,
+        type: 2}
+    - target: {fileID: 114670299502707906, guid: b96a4c5398fc8974790ff42fa530564b,
+        type: 2}
+      propertyPath: cinema
+      value: 
+      objectReference: {fileID: 1441729688977726, guid: 8b28bd1b9b148b049a8ac943f5e4d760,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b96a4c5398fc8974790ff42fa530564b, type: 2}
@@ -6430,3 +6477,9 @@ MonoBehaviour:
   - shop
   - school
   - restaurant
+  - monument1
+  - monument2
+  - monument3
+  - bank
+  - park
+  - cinema

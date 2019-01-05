@@ -7,6 +7,12 @@ TagManager:
   - school
   - shop
   - restaurant
+  - monument1
+  - monument2
+  - bank
+  - monument3
+  - park
+  - cinema
   layers:
   - Default
   - TransparentFX

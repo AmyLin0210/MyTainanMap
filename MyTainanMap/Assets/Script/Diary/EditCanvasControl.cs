@@ -76,6 +76,19 @@ public class EditCanvasControl : MonoBehaviour {
         diaryInfo.GetComponent<CanvasDiaryControl>().OpenDiary(building.GetComponent<buildInfo>().BuildingFile);
         diaryInfo.GetComponent<DiaryInfo>().BuildingFileNow = building.GetComponent<buildInfo>().BuildingFile;
     }
+
+    public void deleteBuilding()
+    {
+        diaryInfo.GetComponent<CanvasDiaryControl>().CloseAllCanvas();
+        buildingMoving = false;
+        player.GetComponent<controller>().moving = true;
+        camera.transform.parent = player.transform;
+        camera.transform.localPosition = cameraStarting;
+        camera.transform.localEulerAngles = cameraStartRotate;
+
+
+        GameObject.Destroy(building);
+    }
     public void back()
     {
         diaryInfo.GetComponent<CanvasDiaryControl>().CloseAllCanvas();

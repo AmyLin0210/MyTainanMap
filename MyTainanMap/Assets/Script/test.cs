@@ -50,7 +50,7 @@ public class test : MonoBehaviour, IPointerClickHandler {
         string chosenBuilding = diaryInfo.GetComponent<DiaryInfo>().chosenBuilding;
         // 以下是可以新增 building 的 code
         GameObject haha = Instantiate(diaryInfo.GetComponent<DiaryInfo>().GetDiaryBuilding(chosenBuilding));
-        haha.transform.position = new Vector3(player.position.x + 0.1f * player.forward.x, 0, player.position.z + 0.1f * player.forward.z);
+        haha.transform.position = new Vector3(player.position.x + 1.0f * player.forward.x, 0, player.position.z + 1.0f * player.forward.z);
         haha.transform.parent = buildings;
         // diaryInfo 是個 gameObject，只要有關日記的處理，就拉這個 gameObject 
         // 下面這兩行超重要，用來儲存建築物的資訊到資料夾裡和初始化一些數據
