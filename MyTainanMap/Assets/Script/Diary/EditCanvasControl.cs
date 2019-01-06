@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class EditCanvasControl : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class EditCanvasControl : MonoBehaviour {
     public GameObject building;
     public GameObject player;
     public GameObject camera;
+    public GameObject buildingButtons;
     public bool buildingMoving = false;
 
     private float speed = 2.0f;
@@ -86,6 +88,11 @@ public class EditCanvasControl : MonoBehaviour {
         camera.transform.localPosition = cameraStarting;
         camera.transform.localEulerAngles = cameraStartRotate;
 
+        buildingButtons.SetActive(true);
+        FileInfo finfo = new FileInfo( building.GetComponent<buildInfo>().BuildingFile);
+        finfo.Delete();
+
+
 
         GameObject.Destroy(building);
     }
@@ -98,6 +105,7 @@ public class EditCanvasControl : MonoBehaviour {
         camera.transform.localPosition = cameraStarting;
         camera.transform.localEulerAngles = cameraStartRotate;
 
+        buildingButtons.SetActive(true);
         diaryInfo.GetComponent<CanvasDiaryControl>().changeBuildingInfo(building);
     }
 }

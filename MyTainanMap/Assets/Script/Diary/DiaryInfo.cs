@@ -9,6 +9,7 @@ public class DiaryInfo : MonoBehaviour {
     public GameObject school, shop, restaurant, monument1, monument2, monument3, bank, park, cinema;
     public Canvas diary_canvas;
     public string chosenBuilding = "shop";
+    public List<string> buildingsName = new List<string>() { "shop", "school", "restaurant", "monument1", "monument2", "monument3", "bank", "park", "cinema" };
 
     int    build_num, diary_num, image_num;
     string project_directory;

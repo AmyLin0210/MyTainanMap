@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class test : MonoBehaviour, IPointerClickHandler {
 
@@ -9,6 +10,7 @@ public class test : MonoBehaviour, IPointerClickHandler {
     public GameObject editCanvas;
     public Transform buildings;
     public Transform player;
+    public GameObject buildingButtons;
 
     void Update()
     {
@@ -34,14 +36,17 @@ public class test : MonoBehaviour, IPointerClickHandler {
                        }
                         */
                 bool isBuilding = false;
-                foreach(string buildingName in editCanvas.GetComponent<buildingDropdown>().buildings)
+                foreach(string buildingName in diaryInfo.GetComponent<DiaryInfo>().buildingsName)
                 {
                     if (building.tag.ToString() == buildingName)
                         isBuilding = true;
                 }
-                
-                if(isBuilding)
+
+                if (isBuilding)
+                {
                     diaryInfo.GetComponent<CanvasDiaryControl>().ShowEditCanvas(building);
+                    buildingButtons.SetActive(false);
+                }
             }
         }
     }
