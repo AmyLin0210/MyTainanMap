@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine.UI;
 
 public class NewCanvasControl : MonoBehaviour {
@@ -30,8 +30,9 @@ public class NewCanvasControl : MonoBehaviour {
     //[MenuItem("Custom/OpenFile")]
     public void AddImage()
     {
-        string temp_path = EditorUtility.OpenFilePanel("Open File Dialog", "D:\\", "Image Files(*.png; *.jpg; *.gif)| *.png; *.jpg; *.gif");
+        //string temp_path = EditorUtility.OpenFilePanel("Open File Dialog", "D:\\", "Image Files(*.png; *.jpg; *.gif)| *.png; *.jpg; *.gif");
 
+        string temp_path = "";
         byte[] fileDate;
 
         if( !string.IsNullOrEmpty(temp_path))
